@@ -174,6 +174,8 @@ for (r in 1:225){ #Uses the reviews 1 to 7233 from PeerJ
   
   final_txt_file <- paste(review_id, ".txt", sep="")
   
+   dir.create("peerj_reviews_txt")
+  
   sink(paste0("peerj_cs_reviews_txt/",final_txt_file))
   for (i in 1:length(peerdoc)){
     cat(peerdoc[i])
