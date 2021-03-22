@@ -40,7 +40,7 @@ This script will go through all the review files in the peerj_reviews_txt folder
 
 This script saves the generated dataframe (where each row contains the data for one review for a version of the manuscript) as a rds file: peerj_data.rds. 
 
-For PeerJ Computer Science, repeat the step above by running textmining_peerj.R which stores data in peerj_cs_data.rds.
+For PeerJ Computer Science, repeat the step above by running textmining_peerj_cs.R which stores data in peerj_cs_data.rds.
 
 ## For Royal Society Open Science articles:
 
