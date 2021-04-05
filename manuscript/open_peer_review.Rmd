@@ -33,7 +33,6 @@ editor_options:
 ---
 
 ```{r setup, include = FALSE}
-
 library(dplyr)
 library(stringr)
 library(ggplot2)
@@ -42,14 +41,14 @@ library(here)
 here::here()
 #### READ IN DATA
 # Read open science and open biology rds datafiles
-TRS_data_os <- readRDS(file = "royal_society_data_os.rds")
-TRS_data_ob <- readRDS(file = "royal_society_data_ob.rds")
+TRS_data_os <- readRDS(file = "../data/royal_society_data_os.rds")
+TRS_data_ob <- readRDS(file = "../data/royal_society_data_ob.rds")
 # Combine both datasets into one.
 TRS_data <- rbind(TRS_data_os, TRS_data_ob)
 
 #Read in PeerJ data
-PeerJ_main_data <- readRDS(file = "peerj_data.rds")
-PeerJ_cs_data <- readRDS(file = "peerj_cs_data.rds")
+PeerJ_main_data <- readRDS(file = "../data/peerj_data.rds")
+PeerJ_cs_data <- readRDS(file = "../data/peerj_cs_data.rds")
 # Combine both datasets into one.
 PeerJ_data <- rbind(PeerJ_main_data, PeerJ_cs_data)
 
@@ -64,15 +63,15 @@ TRS_unique_ob <- TRS_data_ob[!duplicated(TRS_data_ob$df_link),]
 
 
 # We can see how many reviews are open in PeerJ by counting all txt files in the peer_reviews_txt folder, and seeing how many end up in our dataframe:
-open_review_PeerJ <- nrow(PeerJ_unique)/length(list.files(path = "peerj_reviews_txt"))
+open_review_PeerJ <- nrow(PeerJ_unique)/length(list.files(path = "./data/peerj_reviews_txt"))
 
 # We can see how many reviews are open in TRS by counting all doi in scopus, and seeing how many end up in our list of open reviews:
-OS_pdf_list <- readLines(file("royal_society_pdf_files/OS_pdf_list.txt", open = "r"))
+OS_pdf_list <- readLines(file("../data/royal_society_pdf_files/OS_pdf_list.txt", open = "r"))
 
-open_review_TRS <- length(OS_pdf_list) / length(read.csv("scopus_export_rsos.csv", stringsAsFactors = FALSE)$DOI)
+open_review_TRS <- length(OS_pdf_list) / length(read.csv("../data/scopus_export_rsos.csv", stringsAsFactors = FALSE)$DOI)
 
 # How many entries in RSOS in total? Read in scopus datafile
-TRS_scopus_OS <- read.csv("scopus_export_rsos.csv", stringsAsFactors = FALSE)
+TRS_scopus_OS <- read.csv("../data/scopus_export_rsos.csv", stringsAsFactors = FALSE)
 table(TRS_scopus_OS$Document.Type)
 errata_editorial <- sum(table(TRS_scopus_OS$Document.Type)[c(3,4)])
 # Excude Errata and Editorial (that have no reviews)
@@ -80,7 +79,7 @@ TRS_scopus_OS <- TRS_scopus_OS[!TRS_scopus_OS$Document.Type == "Erratum" & !TRS_
 table(TRS_scopus_OS$Document.Type)
 
 # How many entries in RSOS in total? Read in scopus datafile
-TRS_scopus_OB <- read.csv("scopus_export_rsob.csv", stringsAsFactors = FALSE)
+TRS_scopus_OB <- read.csv("../data/scopus_export_rsob.csv", stringsAsFactors = FALSE)
 table(TRS_scopus_OB$Document.Type)
 errata_editorial <- errata_editorial + sum(table(TRS_scopus_OB$Document.Type)[c(2,3,5)])
 # Excude Errata and Editorial (that have no reviews)
