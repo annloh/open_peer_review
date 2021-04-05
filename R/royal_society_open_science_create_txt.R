@@ -6,12 +6,13 @@ library(pdftools)
 library(stringr)
 library(tm)
 
+rsos_create_txt <- function(){
 #########################list of article id's#####################################
-article_id <- readLines(file("royal_society_pdf_files/OS_pdf_list.txt", open = "r"))
+article_id <- readLines(file("data/royal_society_pdf_files/OS_pdf_list.txt", open = "r"))
 
 ########################Reading pdf file #########################################
 for (i in 1:length(article_id)) {
-  pdf_file <- paste("royal_society_pdf_files/open_science/review", article_id[i], ".pdf", sep="") #map with open science pdf's
+  pdf_file <- paste("data/royal_society_pdf_files/open_science/review", article_id[i], ".pdf", sep="") #map with open science pdf's
   print(article_id[i])
   if (file.exists(pdf_file)){
   read <- readPDF(control = list(text = "-layout"))
@@ -71,7 +72,7 @@ for (i in 1:length(article_id)) {
 
 #######################Storing the list into a txt file###########################
 
-  final_txt_file <- paste("royal_society_txt_files/open_science/review", article_id[i], ".txt", sep="") #location where txt's are stored for Open science
+  final_txt_file <- paste("data/royal_society_txt_files/open_science/review", article_id[i], ".txt", sep="") #location where txt's are stored for Open science
   
   sink(final_txt_file)
   for (i in 1:length(trs_doc)){
@@ -80,4 +81,5 @@ for (i in 1:length(article_id)) {
   }
   sink()
   }
+}
 }

@@ -2,6 +2,7 @@
 library(stringr)
 options(max.print=9999999) #allows the console to output more lines
 
+textmining_open_science <- function(){
 #########################################variables used to create the dataframe#################################
 df_link <- c()
 df_section <- c()
@@ -17,7 +18,7 @@ df_id <- c()
 #########################################Read txt id##############################################################
 article_id <- vector()
 
-path <- "royal_society_pdf_files/OS_pdf_list.txt"  #the list of non corrupted Open Science ID's 
+path <- "data/royal_society_pdf_files/OS_pdf_list.txt"  #the list of non corrupted Open Science ID's 
 
 conn <- file(path,open="r")
 article_id <- readLines(conn)
@@ -28,7 +29,7 @@ for (r in 1:length(article_id)){
   
   review_id <- article_id[r]
   
-  path <- paste("royal_society_txt_files/open_science/review", review_id, ".txt", sep="") #used for Open Science
+  path <- paste("data/royal_society_txt_files/open_science/review", review_id, ".txt", sep="") #used for Open Science
   
   if (file.exists(path)){
     open_file <- file(path,open="r")
@@ -194,4 +195,5 @@ for (r in 1:length(article_id)){
 
 df <- data.frame(df_link, df_section, df_days, df_version, df_recommendation, df_word_count, df_anonymous, df_reviewer_name, df_reviewer_number)
 
-saveRDS(df, file = "royal_society_data_os.rds")             #used to create the rds file
+saveRDS(df, file = "data/royal_society_data_os.rds")             #used to create the rds file
+}

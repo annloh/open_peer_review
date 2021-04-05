@@ -11,14 +11,14 @@ article_id_os_open <- vector()
 fix_doc <- vector()
 
 # Create a list of all PDF files in the folder
-article_id <- str_extract(list.files(path = "royal_society_pdf_files\\open_biology\\", pattern = "\\.pdf$"), "[0-9]+") #list all files in the folder and extract article ID
+article_id <- str_extract(list.files(path = "data\\royal_society_pdf_files\\open_biology\\", pattern = "\\.pdf$"), "[0-9]+") #list all files in the folder and extract article ID
 
 for (r in 1:length(article_id)){
   fix_doc[1] <- "corrupted"
   review_id <- article_id[r]
   document <- NULL
 
-  path <- paste("royal_society_pdf_files\\open_biology\\review", review_id, ".pdf", sep="")  #used for open biology
+  path <- paste("data\\royal_society_pdf_files\\open_biology\\review", review_id, ".pdf", sep="")  #used for open biology
   
   if (file.exists(path)){
     open_file <- file(path,open="r")
@@ -33,7 +33,7 @@ for (r in 1:length(article_id)){
   }
 }
 
-final_txt_file <- "royal_society_pdf_files\\OB_pdf_list.txt" #used for open science
+final_txt_file <- "data\\royal_society_pdf_files\\OB_pdf_list.txt" #used for open science
 
 #######################Storing the new list of not corrupted pdf files###########################
 sink(final_txt_file)

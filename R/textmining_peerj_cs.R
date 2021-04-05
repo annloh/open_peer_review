@@ -7,7 +7,7 @@ library(here)
 library(lubridate)
 
 here()
-
+textmining_peerj_cs <-function(){
 #########################################variables used to create the dataframe#################################
 df_link <- c()
 df_section <- c()
@@ -28,7 +28,7 @@ for (r in 1:225){ #starting the loop to create the dataframe from the 6800 PeerJ
   
   review_id <- r
   
-  path <- paste("peerj_cs_reviews_txt/",review_id,".txt", sep="")
+  path <- paste("data/peerj_cs_reviews_txt/",review_id,".txt", sep="")
   
   open_file <- file(path, open = "r")
   lines <- readLines(open_file)
@@ -210,4 +210,5 @@ for (r in 1:225){ #starting the loop to create the dataframe from the 6800 PeerJ
 #################################Creating dataframe and csv file#################################################
 df <- data.frame(df_link, df_section, df_year, df_days, df_version, df_recommendation, df_word_count, df_anonymous, df_reviewer_name)
 
-saveRDS(df, file = "peerj_cs_data.rds")             #used to create the rds file
+saveRDS(df, file = "data/peerj_cs_data.rds")             #used to create the rds file
+}

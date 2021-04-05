@@ -6,12 +6,15 @@ library(pdftools)
 library(stringr)
 library(tm)
 
+dir.create("data/royal_society_txt_files/open_biology", recursive = TRUE)
+
+rsob_create_txt <- function(){
 #########################list of article id's#####################################
-article_id <- readLines(file("royal_society_pdf_files/OB_pdf_list.txt", open = "r"))
+article_id <- readLines(file("data/royal_society_pdf_files/OB_pdf_list.txt", open = "r"))
 
 ########################Reading pdf file #########################################
 for (i in 1:length(article_id)) {
-  pdf_file <- paste("royal_society_pdf_files/open_biology/review", article_id[i], ".pdf", sep="") #map with open biology pdf's
+  pdf_file <- paste("data/royal_society_pdf_files/open_biology/review", article_id[i], ".pdf", sep="") #map with open biology pdf's
   print(article_id[i])
   if (file.exists(pdf_file)){
   read <- readPDF(control = list(text = "-layout"))
@@ -71,7 +74,7 @@ for (i in 1:length(article_id)) {
 
 #######################Storing the list into a txt file###########################
 
-  final_txt_file <- paste("royal_society_txt_files/open_biology/review", article_id[i], ".txt", sep="") #location where txt's are stored for Open biology
+  final_txt_file <- paste("data/royal_society_txt_files/open_biology/review", article_id[i], ".txt", sep="") #location where txt's are stored for Open biology
 
   sink(final_txt_file)
   for (i in 1:length(trs_doc)){
@@ -80,4 +83,5 @@ for (i in 1:length(article_id)) {
   }
   sink()
   }
+}
 }

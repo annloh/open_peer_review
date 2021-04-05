@@ -6,7 +6,10 @@ library(here)
 
 here()
 
-for (r in 1:7930){ #Uses the reviews 1 to 7930 from PeerJ
+peerj_download <- function(ids = 1:7930){
+dir.create("data/peerj_reviews_txt", recursive = TRUE)
+
+for (r in ids){ #Uses the reviews 1 to 7930 from PeerJ
   
   review_id <- r
   
@@ -174,12 +177,11 @@ for (r in 1:7930){ #Uses the reviews 1 to 7930 from PeerJ
   
   final_txt_file <- paste(review_id, ".txt", sep="")
   
-  dir.create("peerj_reviews_txt")
-  
-  sink(paste0("peerj_reviews_txt/",final_txt_file))
+  sink(paste0("data/peerj_reviews_txt/",final_txt_file))
   for (i in 1:length(peerdoc)){
     cat(peerdoc[i])
     cat("\n")
   }
   sink()
+}
 }

@@ -2,6 +2,7 @@
 library(stringr)
 options(max.print=9999999) #allows the console to output more lines
 
+textmining_open_biology <- function(){
 #########################################variables used to create the dataframe#################################
 df_link <- c()
 df_section <- c()
@@ -17,7 +18,7 @@ df_id <- c()
 #########################################Read txt id##############################################################
 article_id <- vector()
 
-path <- "royal_society_pdf_files/OB_pdf_list.txt"  #the list of non corrupted Open Biology ID's 
+path <- "data/royal_society_pdf_files/OB_pdf_list.txt"  #the list of non corrupted Open Biology ID's 
 
 conn <- file(path,open="r")
 article_id <- readLines(conn)
@@ -29,7 +30,7 @@ for (r in 1:length(article_id)){
   
   review_id <- article_id[r]
 
-  path <- paste("royal_society_txt_files/open_biology/review", review_id, ".txt", sep="") #used for Open Biology
+  path <- paste("data/royal_society_txt_files/open_biology/review", review_id, ".txt", sep="") #used for Open Biology
   #path <- paste("E:\\Deze folder\\\\BEP Open Peer Review\\TXT_Files\\TRS\\Open Science\\Review", review_id, ".txt", sep="") #used for Open Science
   
   if (file.exists(path)){
@@ -227,5 +228,5 @@ df <- data.frame(df_link, df_section, df_days, df_version, df_recommendation, df
 OB_df <- df                                                #used to store Open Biology df 
 #OS_df <- df                                               #used to store Open Science df
 #total_df <- rbind(OS_df, OB_df)                           #used to combine the two df's
-saveRDS(df, file = "royal_society_data_ob.rds")             #used to create the csv file
-    
+saveRDS(df, file = "data/royal_society_data_ob.rds")             #used to create the csv file
+}
